@@ -22,16 +22,18 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 		<link href="{% static 'css/tiny-slider.css' %}" rel="stylesheet">
 		<link href="{% static 'css/style.css' %}" rel="stylesheet">
-		<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+		<title>FlytoU </title>
 	</head>
 
-	<body>
+	<body style="background-color: rgb(183, 126, 211);">
 
 		<!-- Start Header/Navigation -->
-		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+		         
+		<!-- <a class="navbar-brand" href="index.html" #3B5D50></a> -->
+		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar" style="background-color: rgb(183, 126, 211);">
 
 			<div class="container">
-				<a class="navbar-brand" href="index.html">Furni<span>.</span></a>
+				<!-- <img src="{% static 'images/toy.png' %}" class="img" width="300" height="300"> -->
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -42,16 +44,21 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="index.html">Home</a>
 						</li>
-						<li><a class="nav-link" href="shop.html">Shop</a></li>
+						<li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
 						<li><a class="nav-link" href="about.html">About us</a></li>
 						<li><a class="nav-link" href="services.html">Services</a></li>
-						<li><a class="nav-link" href="blog.html">Blog</a></li>
-						<li><a class="nav-link" href="contact.html">Contact us</a></li>
+						{% if user.is_authenticated %}
+						<li style="color:rgb(195, 255, 0)">HI ENJOY YOUR SHOPPING <span>{{user.first_name}}</span></li>
+						<li><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+						{% else %}
+						<li><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
+						<li><a class="nav-link" href="contact.html">Log In</a></li>
+						{% endif %}
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
 						<li><a class="nav-link" href="#"><img src="{% static 'images/user.svg' %}"></a></li>
-						<li><a class="nav-link" href="cart.html"><img src="{% static 'images/cart.svg' %}"></a></li>
+						<li><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'images/cart.svg' %}"></a></li>
 					</ul>
 				</div>
 			</div>
@@ -65,143 +72,82 @@
 					<div class="row justify-content-between">
 						<div class="col-lg-5">
 							<div class="intro-excerpt">
-								<h1>Modern Interior <span clsas="d-block">Design Studio</span></h1>
-								<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-								<p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+								<h1 style="color:black">Anytime <span clsas="d-block">Anywhere</span>.</h1>
+								<p class="mb-4" style="color:black">Find and Shop your needs from incredibly product rich shopping companion ELDIOZ ,Your shopping Eldios. Ensure Faster Delivary.</p>
+								<p><a href="" class="btn btn-secondary me-2" style="background-color:rgb(148, 141, 148)">Shop Now</a><a href="#" class="btn btn-white-outline"style="color:black;background-color:rgb(148, 141, 148)" >Explore</a></p>
 							</div>
 						</div>
 						<div class="col-lg-7">
-							<div class="hero-img-wrap">
-								<img src="{% static 'images/bag.jpg' %}" class="img-fluid" width="500" height="500"><!--here change image-->
-							</div>
+							<!-- <div class="hero-img-wrap">
+								<img src="{% static 'images/bag.png' %}" class="img-fluid" width="500" height="500">
+							</div> -->
 						</div>
 					</div>
 				</div>
 			</div>
 		<!-- End Hero Section -->
 
-		<!-- Start Product Section -->
+		<!-- Start featured Product Section -->
 		<div class="product-section">
 			<div class="container">
 				<div class="row">
 
 					<!-- Start Column 1 -->
 					<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-						<h2 class="mb-4 section-title">Crafted with excellent material.</h2>
-						<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. </p>
-						<p><a href="shop.html" class="btn">Explore</a></p>
+						<h3 style="color:black;"><ins>Featured Products</ins></h3>
 					</div> 
 					<!-- End Column 1 -->
 
 					<!-- Start Column 2 -->
+					{% for featured in featured_product %}
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
 						<a class="product-item" href="cart.html">
-							<img src="{% static 'images/product-1.png' %}" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Nordic Chair</h3>
-							<strong class="product-price">$50.00</strong>
+							<img src="{{featured.image.url}}" class="img-fluid product-thumbnail">
+							<h3 class="product-title">{{featured.title}}</h3>
+							<strong class="product-price">{{featured.price}}</strong>
 
 							<span class="icon-cross">
 								<img src="{% static 'images/cross.svg' %}" class="img-fluid">
 							</span>
 						</a>
 					</div> 
-					<!-- End Column 2 -->
+					{% endfor %}
 
-					<!-- Start Column 3 -->
+				</div>
+			</div>
+		</div>
+		<!-- End featured Product Section -->
+
+		<!-- Start latest Product Section -->
+		<div class="product-section">
+			<div class="container">
+				<div class="row">
+
+					<!-- Start Column 1 -->
+					<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+						<h3 style="color:black;text-align: center;" ><ins>Latest Products</ins></h3>
+					</div> 
+					{% for latest in latest_product %}
+				
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
 						<a class="product-item" href="cart.html">
-							<img src="{% static 'images/product-2.png'%}" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Kruzo Aero Chair</h3>
-							<strong class="product-price">$78.00</strong>
-
-							<span class="icon-cross">
-								<img src="{% static 'images/cross.svg'%}" class="img-fluid">
-							</span>
-						</a>
-					</div>
-					<!-- End Column 3 -->
-
-					<!-- Start Column 4 -->
-					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-						<a class="product-item" href="cart.html">
-							<img src="{% static 'images/product-3.png'%}" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Ergonomic Chair</h3>
-							<strong class="product-price">$43.00</strong>
+							<img src="{{latest.image.url}}" class="img-fluid product-thumbnail">
+							<h3 class="product-title">{{latest.title}}</h3>
+							<strong class="product-price">{{latest.price}}</strong>
 
 							<span class="icon-cross">
 								<img src="{% static 'images/cross.svg' %}" class="img-fluid">
 							</span>
 						</a>
-					</div>
-					<!-- End Column 4 -->
-
+					</div> 
+					{% endfor %}
+					
 				</div>
 			</div>
 		</div>
-		<!-- End Product Section -->
+		<!-- End latest Product Section -->
 
-		<!-- Start Why Choose Us Section -->
-		<div class="why-choose-section">
-			<div class="container">
-				<div class="row justify-content-between">
-					<div class="col-lg-6">
-						<h2 class="section-title">Why Choose Us</h2>
-						<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-
-						<div class="row my-5">
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="{% static 'images/truck.svg' %}" alt="Image" class="imf-fluid">
-									</div>
-									<h3>Fast &amp; Free Shipping</h3>
-									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-								</div>
-							</div>
-
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="{% static 'images/bag.svg' %}" alt="Image" class="imf-fluid">
-									</div>
-									<h3>Easy to Shop</h3>
-									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-								</div>
-							</div>
-
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="{% static 'images/support.svg' %}" alt="Image" class="imf-fluid">
-									</div>
-									<h3>24/7 Support</h3>
-									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-								</div>
-							</div>
-
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="{% static 'images/return.svg' %}" alt="Image" class="imf-fluid">
-									</div>
-									<h3>Hassle Free Returns</h3>
-									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-								</div>
-							</div>
-
-						</div>
-					</div>
-
-					<div class="col-lg-5">
-						<div class="img-wrap">
-							<img src="{% static 'images/why-choose-us-img.jpg' %}" alt="Image" class="img-fluid">
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<!-- End Why Choose Us Section -->
+		
 
 		<!-- Start We Help Section -->
 		<div class="we-help-section">
@@ -215,7 +161,7 @@
 						</div>
 					</div>
 					<div class="col-lg-5 ps-lg-5">
-						<h2 class="section-title mb-4">We Help You Make Modern Interior Design</h2>
+						<!-- <h2 class="section-title mb-4">We Help You Make Modern Interior Design</h2>
 						<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
 
 						<ul class="list-unstyled custom-list my-4">
@@ -223,8 +169,8 @@
 							<li>Donec vitae odio quis nisl dapibus malesuada</li>
 							<li>Donec vitae odio quis nisl dapibus malesuada</li>
 							<li>Donec vitae odio quis nisl dapibus malesuada</li>
-						</ul>
-						<p><a herf="#" class="btn">Explore</a></p>
+						</ul> -->
+						<!-- <p><a herf="#" class="btn">Explore</a></p> -->
 					</div>
 				</div>
 			</div>
@@ -236,7 +182,7 @@
 			<div class="container">
 				<div class="row">
 
-					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+					<!-- <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
 						<div class="product-item-sm d-flex">
 							<div class="thumbnail">
 								<img src="{% static 'images/product-1.png' %}" alt="Image" class="img-fluid">
@@ -247,8 +193,8 @@
 								<p><a href="#">Read More</a></p>
 							</div>
 						</div>
-					</div>
-
+					</div> -->
+<!-- 
 					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
 						<div class="product-item-sm d-flex">
 							<div class="thumbnail">
@@ -260,9 +206,9 @@
 								<p><a href="#">Read More</a></p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
-					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+					<!-- <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
 						<div class="product-item-sm d-flex">
 							<div class="thumbnail">
 								<img src="{% static 'images/product-3.png' %}" alt="Image" class="img-fluid">
@@ -273,15 +219,15 @@
 								<p><a href="#">Read More</a></p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 				</div>
 			</div>
 		</div>
 		<!-- End Popular Product -->
-
-		<!-- Start Testimonial Slider -->
-		<div class="testimonial-section">
+<!-- 
+		Start Testimonial Slider -->
+		<!-- <div class="testimonial-section">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-7 mx-auto text-center">
@@ -320,10 +266,10 @@
 
 										</div>
 									</div>
-								</div> 
+								</div>--> 
 								<!-- END item -->
 
-								<div class="item">
+								<!--<div class="item">
 									<div class="row justify-content-center">
 										<div class="col-lg-8 mx-auto">
 
@@ -343,10 +289,10 @@
 
 										</div>
 									</div>
-								</div> 
+								</div> -->
 								<!-- END item -->
 
-								<div class="item">
+								<!--<div class="item">
 									<div class="row justify-content-center">
 										<div class="col-lg-8 mx-auto">
 
@@ -375,11 +321,11 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- End Testimonial Slider -->
 
 		<!-- Start Blog Section -->
-		<div class="blog-section">
+		<!--<div class="blog-section">
 			<div class="container">
 				<div class="row mb-5">
 					<div class="col-md-6">
@@ -430,8 +376,8 @@
 
 				</div>
 			</div>
-		</div>
-		<!-- End Blog Section -->	
+		</div>-->
+		<!-- End Blog Section	 -->
 
 		<!-- Start Footer Section -->
 		<footer class="footer-section">

@@ -21,8 +21,13 @@ from django.conf.urls.static import static
 from . views import *
 
 urlpatterns = [
-        path('',index,name='index')
-    
+        path('',index,name='index'),
+        path('shop/',shop ,name='shop'),
+        path('index/',index ,name='index'),
+        path('product/<pk>',single_product, name='product'),
+        path('cart/',cart,name='cart')
+
+
 ]
 
 if settings.DEBUG:
