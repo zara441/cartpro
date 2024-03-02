@@ -46,6 +46,7 @@ def signup(request):
 
 def login(request):
     if request.POST  and 'login' in request.POST:
+        
         try:
             username=request.POST['username']
             password=request.POST['password']

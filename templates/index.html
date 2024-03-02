@@ -50,6 +50,8 @@
 						{% if user.is_authenticated %}
 						<li style="color:rgb(195, 255, 0)">HI ENJOY YOUR SHOPPING <span>{{user.first_name}}</span></li>
 						<li><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+						<li><a class="nav-link" href="{% url 'orders' %}">Orders</a></li>
+
 						{% else %}
 						<li><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
 						<li><a class="nav-link" href="contact.html">Log In</a></li>

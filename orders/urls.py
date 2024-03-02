@@ -15,10 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from os import remove
+from tabnanny import check
 from django.urls import path
 from . views import *
 
+
 urlpatterns = [
         
+        path('cart/',cart,name='cart'),
+        path('add_to_cart',add_to_cart,name='add_to_cart'),
+        path('remove/<order_id>',remove_item_from_cart,name="remove"),
+        path('checkout',checkout,name="checkout"),
+        
+        path('orders',show_orders,name='orders')
+
+
     
 ]
+

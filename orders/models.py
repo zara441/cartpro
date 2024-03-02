@@ -1,4 +1,4 @@
-from email.policy import default
+# from email.policy import default
 from django.db import models
 from products.models import Product
 from customers.models import Customers
@@ -24,5 +24,5 @@ class Order(models.Model):
 class OrderedItem(models.Model):
     product=models.ForeignKey(Product,on_delete=models.SET_NULL,null=True,related_name='added_carts')
     quantity=models.IntegerField(default=1)
-    owner=models.ForeignKey(Customers,on_delete=models.SET_NULL,null=True,related_name='addeditems')   
+    owner=models.ForeignKey(Order,on_delete=models.SET_NULL,null=True,related_name='addeditems')   
     

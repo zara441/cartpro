@@ -22,6 +22,7 @@ urlpatterns = [
     path('',include('customers.urls')),
     path('',include('products.urls')),
     path('',include('orders.urls')),
-    path('',include('themes.urls'))
+    path('',include('themes.urls')),
+    path('',include('delivery.urls'))
 
 ]

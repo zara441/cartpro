@@ -24,8 +24,7 @@ urlpatterns = [
         path('',index,name='index'),
         path('shop/',shop ,name='shop'),
         path('index/',index ,name='index'),
-        path('product/<pk>',single_product, name='product'),
-        path('cart/',cart,name='cart')
+        path('product/<pk>',single_product, name='product')
 
 
 ]

@@ -208,7 +208,30 @@ img {
 }
 
 /* ----- Footer Section ----- */
+	.quantity {
+	position: relative;
+	}
 
+	input[type=number]
+	{
+	-moz-appearance: textfield;
+	}
+
+	.quantity input {
+	width: 60px;
+	height: 42px;
+	line-height: 1.65;
+	float: left;
+	display: block;
+	padding: 0;
+	margin: 0;
+	padding-left: 20px;
+	border: 4px solid #918c8c;
+	}
+
+	.quantity input:focus {
+	outline: 0;
+	}
 
     </style>
 </head>
@@ -250,9 +273,25 @@ img {
                 <p>
 					{{single_product.description}}
 			    </p>
-            </div>
-            <a href="{% url 'cart' %}"><button class="buy--btn">ADD TO CART</button></a>
+				<div>
+					<form method="post" action="{% url 'add_to_cart' %}" enctype="multipart/form-data">
+						{% csrf_token %}
+						<input type="hidden" value="{{ single_product.id }}" name="product_id">
+
+						<div class="quantity">
+							<input type="number" name="quantity" min="1" max="9" step="1" value="1">
+						</div><br><br><br><br><br><br><br>
+						
+						<button class="buy--btn">ADD TO CART</button>
+					</form>	
+				</div>
+
+			
+			</div>
+				
+			
         </div>
     </section>
+	
 </body>
 </html>

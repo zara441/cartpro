@@ -45,6 +45,6 @@ def single_product(request,pk):
     print(product_detail)
     return render(request, 'product_details.html',{'single_product':product_detail}) 
 
-def cart(request):
-    return render(request, 'cart.html')  
+# def cart(request):
+#     return render(request, 'cart.html')  
 
