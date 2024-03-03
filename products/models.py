@@ -15,6 +15,7 @@ class Product(models.Model):
     delete_status=models.IntegerField(choices=DELETE_CHOICE,default=LIVE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
+    sold_rate=models.IntegerField(default=0)
     
 
 

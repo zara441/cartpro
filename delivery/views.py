@@ -5,15 +5,18 @@ from django.contrib import messages
 from . models import  OrderDelivery
 from orders.models import Order,OrderedItem
 from customers.models import Customers
+from products.models import Product
 
 # Create your views here.
 @login_required(login_url='customer/login')        
 def thankyou(request):
+    
     if request.POST:
         cart_id=request.POST['cart_id']
         
         user=request.user
         customer=user.customer_profile
+
         order_obj,created=Order.objects.get_or_create(owner=customer,
                                                     order_status=Order.ORDER_CONFIRMED,
                                                     id=cart_id
@@ -22,6 +25,27 @@ def thankyou(request):
         if order_obj:
             order_obj.order_status=Order.ORDER_PROCESSED
             order_obj.save()
+            
+            # FOR COUNTING BEST SELLING PRODUCTS
+            
+            ordered_products=OrderedItem.objects.filter(owner=cart_id)
+            pro_ids=[]
+            
+            for i in ordered_products:
+                
+                pro_ids.append(i.product.id)
+            
+            
+            for j in pro_ids:
+                product=Product.objects.get(id=j)
+                
+                selling_count=0
+                if product:
+                    selling_count += 1
+                    
+                    product.sold_rate += selling_count
+                    product.save()
+                           
         else:
             status_message="unable to process"
             messages.error(request,status_message)

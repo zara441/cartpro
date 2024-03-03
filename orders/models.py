@@ -25,4 +25,5 @@ class OrderedItem(models.Model):
     product=models.ForeignKey(Product,on_delete=models.SET_NULL,null=True,related_name='added_carts')
     quantity=models.IntegerField(default=1)
     owner=models.ForeignKey(Order,on_delete=models.SET_NULL,null=True,related_name='addeditems')   
+    total=models.FloatField(null=True)
     

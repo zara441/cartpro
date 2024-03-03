@@ -1,4 +1,3 @@
-from venv import create
 from django.shortcuts import redirect, render
 from . models import Order,OrderedItem
 from products.models import Product
