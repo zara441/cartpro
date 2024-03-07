@@ -8,9 +8,11 @@ from django.core.paginator import Paginator
 def index(request):
     featured_product= Product.objects.order_by('-prority')[:4]
     latest_product= Product.objects.order_by('-id')[:4]
+    best_seller=Product.objects.order_by('-sold_rate')[:2]
     context = {
         'featured_product':featured_product,
-        'latest_product':latest_product
+        'latest_product':latest_product,
+        'best_seller':best_seller
     }
     return render(request,'index.html',context)
 
